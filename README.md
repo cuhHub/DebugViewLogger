@@ -30,4 +30,5 @@ This will only work on Windows as DebugView logs are a Windows-native thing.
 ⚠️ | This is a console application, not a GUI. Double-clicking and running it therefore will not work - you must use it via a terminal!
 
 ## ✨ | Credit
+- [**DebugView++**](https://github.com/CobaltFusion/DebugViewPP): Console version of this app is used for capturing logs.
 - **Cuh4** ([GitHub](https://github.com/Cuh4))
