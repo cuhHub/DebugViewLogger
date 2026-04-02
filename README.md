@@ -3,6 +3,8 @@
 ## 📚 | Overview
 A tool to capture and write DebugView logs to files. Useful for saving logs emitted from Stormworks addons/mods via `debug.log`, etc.
 
+This will only work on Windows as DebugView logs are a Windows-native thing.
+
 ## 🔗 Links
 - GitHub: https://github.com/cuhHub/DebugViewLogger.
 
