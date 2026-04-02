@@ -1,17 +1,16 @@
 @ECHO OFF
 
+:: Clean-state
+set dist_path=dist\DebugViewLogger
+rmdir %dist_path% /S /Q
+
 :: Build for exe distribution
 pip install pyinstaller --upgrade
 
-set dist_path=dist\DebugViewLogger
-
 pyinstaller ^
-    --onefile ^
     -n DebugViewLogger ^
     --icon "imgs/icon-48x48.ico" ^
     src\main.py
-
-move "dist\DebugViewLogger.exe" "%dist_path%"
 
 :: Copy requirements
 copy "README.md" %dist_path%
