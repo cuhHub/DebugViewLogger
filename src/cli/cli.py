@@ -21,6 +21,7 @@ limitations under the License.
 
 # // Imports
 import click
+from pathlib import Path
 
 from .cli_context import (
     setup_context,
@@ -29,30 +30,69 @@ from .cli_context import (
 )
 
 from debug_view_logger import DebugViewLogger
-from logger import logger, LOG_DIR
+import log
 from shared import __version__
 
 # // Main
 @click.group()
 @click.version_option(__version__, "-v")
 @click.help_option("--help", "-h")
+@click.option(
+    "--log-dir", "-l",
+    type = click.Path(exists = False, file_okay = False, dir_okay = True, writable = True, path_type = Path),
+    required = False,
+    help = "Overrides what directory to write logs to."
+)
+@click.option(
+    "--max-log-size", "-m",
+    type = click.INT,
+    required = False,
+    help = "Overrides what the maximum log size in MB is."
+)
+@click.option(
+    "--max-logs", "-n",
+    type = click.INT,
+    required = False,
+    help = "Overrides what the maximum number of log files is."
+)
 @click.pass_context
-def cli(context: click.Context):
+def cli(
+    context: click.Context,
+    log_dir: Path | None,
+    max_log_size: int | None,
+    max_logs: int | None
+):
     """
     A tool for capturing and writing DebugView logs to a file.
     """
     
-    logger.info("DebugViewLogger - A tool for capturing and writing DebugView logs to a file.")
+    if log_dir is not None:
+        log.log_dir = log_dir
+        
+    if max_log_size is not None:
+        log.max_log_size_mb = max_log_size
+    
+    if max_logs is not None:
+        log.max_logs = max_logs
+    
+    log.setup_logger(log.logger)
+    
+    click.echo("-------------------------")
+    click.echo("DebugViewLogger - A tool for capturing and writing DebugView logs to a file.")
+    click.echo("https://github.com/cuhHub/DebugViewLogger")
+    click.echo(f"Settings: {max_log_size}MB logs, max {max_logs} log files, log to {log_dir}")
+    click.echo("-------------------------")
+
     setup_context(context, DebugViewLogger())
 
 @cli.command()
 @pass_context
 def start(context: CLIContext):
     """
-    Starts capturing logs.
+    Starts capturing and writing logs.
     """
     
-    logger.info(f"Logs will be written to {LOG_DIR}.")
-    logger.info("Use CTRL + C to terminate.")
+    click.echo(f"Logs will be written to {log.log_dir}.")
+    click.echo("Use CTRL + C to terminate.")
 
     context.debug_view_logger.start()
