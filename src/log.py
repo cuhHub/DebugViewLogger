@@ -26,11 +26,9 @@ from logging.handlers import RotatingFileHandler
 from shared import DATA_PATH
 
 # // Main
-LOG_DIR = DATA_PATH / "logs"
-LOG_DIR.mkdir(exist_ok = True)
-
-MAX_LOG_SIZE_GB = 10
-MAX_LOGS = 5
+log_dir = DATA_PATH / "logs"
+max_log_size_mb = 5000
+max_logs = 5
 
 def setup_logger(logger: logging.Logger):
     """
@@ -42,12 +40,13 @@ def setup_logger(logger: logging.Logger):
     
     logger.setLevel(logging.DEBUG)
 
-    log_path = LOG_DIR / f"{logger.name}.log"
+    log_dir.mkdir(exist_ok = True, parents = True)
+    log_path = log_dir / f"{logger.name}.log"
 
     file_handler = RotatingFileHandler(
         log_path,
-        maxBytes = MAX_LOG_SIZE_GB * 1024 * 1024 * 1024,
-        backupCount = MAX_LOGS
+        maxBytes = max_log_size_mb * 1024 * 1024,
+        backupCount = max_logs
     )
     
     stream_handler = logging.StreamHandler()
@@ -61,4 +60,3 @@ def setup_logger(logger: logging.Logger):
     logger.addHandler(stream_handler)
 
 logger = logging.getLogger("DebugViewLogger")
-setup_logger(logger)
