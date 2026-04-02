@@ -24,7 +24,7 @@ import subprocess
 from pathlib import Path
 from abc import abstractmethod, ABC
 
-from logger import logger
+from log import logger
 from shared import APP_PATH
 
 # // Main

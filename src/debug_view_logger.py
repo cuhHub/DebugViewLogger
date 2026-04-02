@@ -20,7 +20,7 @@ limitations under the License.
 """
 
 # // Imports
-from logger import logger
+from log import logger
 from libs.capture import DebugViewCapture
 
 # // Main
