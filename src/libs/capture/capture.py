@@ -123,7 +123,9 @@ class DebugViewCapture(ABC):
             command_line,
             stdout = subprocess.PIPE,
             stderr = subprocess.STDOUT,
-            universal_newlines = True
+            text = True,
+            encoding = "utf-8",
+            errors = "replace"
         )
         
         logger.info(f"DebugViewCapture: Process started, PID: {self.process.pid}")
