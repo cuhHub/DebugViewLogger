@@ -1,0 +1,12 @@
+# Cache
+*.pyc
+__pycache__
+
+# Distribution
+dist
+build
+*.spec
+*.egg-info
+
+# Application Data
+src/data
