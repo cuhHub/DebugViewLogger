@@ -21,7 +21,10 @@ limitations under the License.
 
 # // Imports
 from cli import cli
+import log
 
 # // Main        
 if __name__ == "__main__":
     cli()
+else: # no one should import this, but just in case
+    log.setup_logger(log.logger)
