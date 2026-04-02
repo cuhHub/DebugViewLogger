@@ -46,4 +46,4 @@ APP_PATH = get_app_path(IS_PYINSTALLER_CONTEXT)
 DATA_PATH = APP_PATH / "data"
 DATA_PATH.mkdir(exist_ok = True, parents = True)
 
-__version__ = "1.0.0"
+__version__ = "1.1.0"
