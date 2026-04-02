@@ -80,7 +80,7 @@ def cli(
     click.echo("-------------------------")
     click.echo("DebugViewLogger - A tool for capturing and writing DebugView logs to a file.")
     click.echo("https://github.com/cuhHub/DebugViewLogger")
-    click.echo(f"Settings: {max_log_size}MB logs, max {max_logs} log files, log to {log_dir}")
+    click.echo(f"Settings: {log.max_log_size_mb}MB logs, max {log.max_logs} log files, log to {log.log_dir}")
     click.echo("-------------------------")
 
     setup_context(context, DebugViewLogger())
